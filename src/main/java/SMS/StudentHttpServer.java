@@ -89,17 +89,6 @@ public class StudentHttpServer {
             int page = 0;
             int size = 5;
 
-//            if (query == null) {
-//                List<Student> students = studentService.getStudents();
-//                return objectMapper.writeValueAsString(students);
-//            } else {
-//                int id = Integer.parseInt(query.split("=")[1]);
-//                Student student = studentService.getStudents().stream()
-//                        .filter(s -> s.getId() == id)
-//                        .findFirst()
-//                        .orElse(null);
-//                return student != null ? objectMapper.writeValueAsString(student) : "{\"error\": \"Student not found\"}";
-//            }
             if (query != null) {
                 String[] queryParam = query.split("&");
                 for (String param : queryParam) {
@@ -132,7 +121,7 @@ public class StudentHttpServer {
             String requestBody = new String(exchange.getRequestBody().readAllBytes());
             JsonNode jsonNode = objectMapper.readTree(requestBody);
 
-            int id = jsonNode.get("id").asInt();
+            int id = studentService.getStudents().size() + 1;
             String firstName = jsonNode.get("firstName").asText();
             String lastName = jsonNode.get("lastName").asText();
             int age = jsonNode.get("age").asInt();
