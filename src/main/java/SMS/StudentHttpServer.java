@@ -39,6 +39,8 @@ public class StudentHttpServer {
     private class StudentHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+
             if (!Authentication.authenticate(exchange)) {
                 return;
             }
