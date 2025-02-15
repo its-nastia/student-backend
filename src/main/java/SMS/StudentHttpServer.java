@@ -31,6 +31,7 @@ public class StudentHttpServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
         server.createContext("/students", new StudentHandler());
         server.createContext("/graduate", new GraduateHandler());
+        server.createContext("/auth", new AuthHandler());
         server.setExecutor(null);
         server.start();
         System.out.println("HTTP server started on port " + PORT);
@@ -41,7 +42,7 @@ public class StudentHttpServer {
         public void handle(HttpExchange exchange) throws IOException {
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, X-Api-Key");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, token");
 
             if ("OPTIONS".equals(exchange.getRequestMethod())) {
                 exchange.sendResponseHeaders(204, -1);
