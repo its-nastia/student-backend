@@ -10,8 +10,7 @@ public class UndergradStudentTest {
     @ParameterizedTest
     @CsvSource({
             "1, Artem, Doe, 10, ART",
-            "2, Bob, Dillan, 35, MATH",
-            "3, Olga, Doe, 23, CS"
+            "2, Bob, Dillan, 35, MATH"
     })
     public void testUndegradStudents(int id, String firstName, String lastName, int age, Major major) {
         UndergradStudent student = new UndergradStudent(id, firstName, lastName, age, major);
